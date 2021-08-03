@@ -14,6 +14,10 @@ GameEngine::~GameEngine()
 void GameEngine::parse(std::string& input)
 {
     std::cout << std::endl;
+    std::cout << input << std::endl;
+    std::cout << std::endl;
+
+
     option = convertStrToCMD(input);
 
     switch (option)
@@ -34,9 +38,8 @@ void GameEngine::parse(std::string& input)
         case 2:
         {
             Running = false;
-            exit(2);
+            break;
         }
-        
         case 3:
         {
             std::cout << "when I implement this it will create a new character with one of the available classes" << std::endl;

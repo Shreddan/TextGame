@@ -2,6 +2,9 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <Windows.h>
+#include <format>
+#include <single_include/nlohmann/json.hpp>
 
 class GameEngine
 {
