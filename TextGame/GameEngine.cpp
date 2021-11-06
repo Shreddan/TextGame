@@ -11,65 +11,93 @@ GameEngine::~GameEngine()
 {
 }
 
+void GameEngine::update()
+{
+    while (this->option != 2)
+    {
+        std::getline(std::cin, input);
+
+        for (int i = 0; i < input.size(); i++)
+        {
+            input[i] = std::tolower(input[i]);
+        }
+        parse(input);
+        input.clear();
+        
+    }
+}
+
 void GameEngine::parse(std::string& input)
 {
     std::cout << std::endl;
-    std::cout << input << std::endl;
-    std::cout << std::endl;
-
+    //std::cout << input << std::endl;
+    //std::cout << std::endl;
 
     option = convertStrToCMD(input);
 
     switch (option)
     {
-        default:
+        case 0:
         {
             std::cout << "Command not recognised try [help] for more information" << std::endl;
+            std::cout << std::endl;
             break;
         }
         case 1:
         {
-            std::cout << "This is the help screen ( type the commands without the [] )" << std::endl;
-            std::cout << "to create a new character type [new character]" << std::endl;
-            std::cout << "to load an exister character type [load character]" << std::endl;
-            std::cout << "to delete an existing character type [delete character]" << std::endl;
-            break;
-        }
-        case 2:
-        {
-            Running = false;
+            std::cout << ESC << START << NORMAL << "m" << std::flush;
+            std::cout << "This is the help screen ( type the commands without the ] )" << std::endl;
+            std::cout << "to create a new character type [new]" << std::endl;
+            std::cout << "to load an existing character type [load]" << std::endl;
+            std::cout << "to delete an existing character type [delete]" << std::endl;
+            std::cout << std::endl;
             break;
         }
         case 3:
         {
             std::cout << "when I implement this it will create a new character with one of the available classes" << std::endl;
+            std::cout << std::endl;
             break;
         }
     }
     
-    option = 0;
 }
 
 int GameEngine::convertStrToCMD(std::string& str)
 {
-    if (str == "help")
+    //std::cout << str << std::endl;
+
+    std::regex r("(\\w+)");
+    std::smatch rs;
+
+    if (std::regex_search(str, rs, r))
+    {
+        std::cout << "Match Length: " << rs.size() << std::endl;
+        std::cout << std::endl;
+    }
+
+    /*for (int i = 0; i < rs.size(); i++)
+    {
+        std::cout << rs[i].str() << std::endl;
+    }*/
+
+    if (rs[0] == "help")
     {
         return 1;
     }
-    else if (str == "q" || "quit")
+    else if (rs[0] == "quit")
     {
         return 2;
     }
-    else if (str == "new character")
+    else if (rs[0] == "new")
     {
         return 3;
     }
+    else
+    {
+        return 0;
+    }
     
-}
-
-bool GameEngine::getRunning()
-{
-    return Running;
 }
 
 
