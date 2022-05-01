@@ -12,12 +12,12 @@ int main()
     std::cout << "Welcome to my text game...." << std::endl;
     g.OutputColour(g.Hostile);
     std::cout << "theres nothing really here yet, but hopefully....soon" << std::endl;
-    g.OutputColour(g.Character);
+    g.OutputColour(g.Player);
     std::cout << "Type [help] to learn the commands you can do" << std::endl;
     std::cout << std::endl;
     g.ResetColour();
 
-    g.checkCharacterDirectory();
+    g.checkDirectory("Characters");
     g.update();
     
     return 0;

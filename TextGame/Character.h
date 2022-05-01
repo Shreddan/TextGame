@@ -5,8 +5,10 @@
 class Character : public Entity
 {
 public:
-	Character();
+	Character(std::string name);
 	~Character();
+
+	void Interact();
 
 private:
 

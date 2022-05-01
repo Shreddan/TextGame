@@ -8,6 +8,7 @@
 #include <single_include/nlohmann/json.hpp>
 #include "System.h"
 #include <regex>
+#include "Character.h"
 
 class GameEngine
 {
@@ -18,7 +19,7 @@ public:
 	enum outType
 	{
 		System,
-		Character,
+		Player,
 		Npc,
 		Hostile
 
@@ -31,11 +32,15 @@ public:
 	void ResetColour();
 	void checkDirectory(std::string p);
 	void CreateCharacter();
+	void LoadCharacters();
 
 private:
 	bool Running;
 	std::string input;
 	int option;
+	std::vector<std::string> Characters;
+	const std::filesystem::path characters{ "Characters" };
+	Character* player;
 	
 };
 
