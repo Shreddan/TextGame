@@ -25,13 +25,11 @@ void GameEngine::update()
         input.clear();
         
     }
-}
+   }
 
 void GameEngine::parse(std::string& input)
 {
     std::cout << std::endl;
-    //std::cout << input << std::endl;
-    //std::cout << std::endl;
 
     option = convertStrToCMD(input);
 
@@ -39,13 +37,14 @@ void GameEngine::parse(std::string& input)
     {
         case 0:
         {
+            ResetColour();
             std::cout << "Command not recognised try [help] for more information" << std::endl;
             std::cout << std::endl;
             break;
         }
         case 1:
         {
-            std::cout << ESC << START << NORMAL << "m" << std::flush;
+            ResetColour();
             std::cout << "This is the help screen ( type the commands without the ] )" << std::endl;
             std::cout << "to create a new character type [new]" << std::endl;
             std::cout << "to load an existing character type [load]" << std::endl;
@@ -65,31 +64,25 @@ void GameEngine::parse(std::string& input)
 
 int GameEngine::convertStrToCMD(std::string& str)
 {
-    //std::cout << str << std::endl;
+    
 
-    std::regex r("(\\w+)");
+    std::regex r("(\\w+)(\\w*)(\\w*)");
     std::smatch rs;
 
     if (std::regex_search(str, rs, r))
     {
-        std::cout << "Match Length: " << rs.size() << std::endl;
         std::cout << std::endl;
     }
-
-    /*for (int i = 0; i < rs.size(); i++)
-    {
-        std::cout << rs[i].str() << std::endl;
-    }*/
 
     if (rs[0] == "help")
     {
         return 1;
     }
-    else if (rs[0] == "quit")
+    else if (rs[0] == "quit" || rs[0] == "q")
     {
         return 2;
     }
-    else if (rs[0] == "new")
+    else if (rs[0] == "new character")
     {
         return 3;
     }
@@ -98,6 +91,38 @@ int GameEngine::convertStrToCMD(std::string& str)
         return 0;
     }
     
+}
+
+void GameEngine::OutputColour(int type)
+{
+    switch (type)
+    {
+    case System:
+    {
+        std::cout << ESC << START << FGYELLOW << std::flush;
+        break;
+    }
+    case Hostile:
+    {
+        std::cout << ESC << START << FGRED << std::flush;
+        break;
+    }
+    case Character:
+    {
+        std::cout << ESC << START << FGGREEN << std::flush;
+        break;
+    }
+    case Npc:
+    {
+        std::cout << ESC << START << FGBLUE << std::flush;
+        break;
+    }
+    }
+}
+
+void GameEngine::ResetColour()
+{
+    std::cout << ESC << START << NORMAL << "m" << std::flush;
 }
 
 

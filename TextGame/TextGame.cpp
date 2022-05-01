@@ -8,17 +8,17 @@ int main()
 
     GameEngine g;
 
-    std::cout << std::format("{}{}{};{}Welcome to my text game....", ESC, START, UNDERLINE, FGRED) << std::endl;
-    std::cout << ESC << START << NORMAL << "m" << std::flush;
-    std::cout << std::format ("{}{}{};{}theres nothing really here yet, but hopefully.... soon", ESC, START, BOLD, FGGREEN) << std::endl;
-    std::cout << ESC << START << NORMAL << "m" << std::flush;
-    std::cout << std::format ("{}{}{}Type [help] to learn the commands you can do", ESC, START, FGYELLOW) << std::endl;
+    g.OutputColour(g.System);
+    std::cout << "Welcome to my text game...." << std::endl;
+    g.OutputColour(g.Hostile);
+    std::cout << "theres nothing really here yet, but hopefully....soon" << std::endl;
+    g.OutputColour(g.Character);
+    std::cout << "Type [help] to learn the commands you can do" << std::endl;
     std::cout << std::endl;
-    std::cout << ESC << START << NORMAL << "m" << std::flush;
+    g.ResetColour();
 
     g.update();
     
-    //getchar();
     return 0;
 }
 

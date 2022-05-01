@@ -14,11 +14,20 @@ public:
 	GameEngine();
 	~GameEngine();
 
+	enum outType
+	{
+		System,
+		Character,
+		Npc,
+		Hostile
+
+	};
+
 	void update();
 	void parse(std::string& input);
 	int convertStrToCMD(std::string& str);
-
-	//bool getRunning();
+	void OutputColour(int type);
+	void ResetColour();
 
 private:
 	bool Running;
@@ -27,3 +36,4 @@ private:
 	
 };
 
+ 
