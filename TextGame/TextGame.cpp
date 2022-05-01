@@ -17,6 +17,7 @@ int main()
     std::cout << std::endl;
     g.ResetColour();
 
+    g.checkCharacterDirectory();
     g.update();
     
     return 0;

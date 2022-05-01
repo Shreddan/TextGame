@@ -54,8 +54,9 @@ void GameEngine::parse(std::string& input)
         }
         case 3:
         {
-            std::cout << "when I implement this it will create a new character with one of the available classes" << std::endl;
+            std::cout << "Character Creation initialising" << std::endl;
             std::cout << std::endl;
+            CreateCharacter();
             break;
         }
     }
@@ -66,7 +67,7 @@ int GameEngine::convertStrToCMD(std::string& str)
 {
     
 
-    std::regex r("(\\w+)(\\w*)(\\w*)");
+    std::regex r("(\\w+) (\\w*) (\\w*)");
     std::smatch rs;
 
     if (std::regex_search(str, rs, r))
@@ -74,17 +75,25 @@ int GameEngine::convertStrToCMD(std::string& str)
         std::cout << std::endl;
     }
 
-    if (rs[0] == "help")
+    if (rs.ready())
     {
-        return 1;
-    }
-    else if (rs[0] == "quit" || rs[0] == "q")
-    {
-        return 2;
-    }
-    else if (rs[0] == "new character")
-    {
-        return 3;
+        std::cout << rs.length() << std::endl;
+        if (rs[0] == "help")
+        {
+            return 1;
+        }
+        else if (rs[0] == "quit" || rs[0] == "q")
+        {
+            return 2;
+        }
+        else if (rs[0] == "new character")
+        {
+            return 3;
+        }
+        else if (rs[0] == "load character")
+        {
+            return 4;
+        }
     }
     else
     {
@@ -123,6 +132,27 @@ void GameEngine::OutputColour(int type)
 void GameEngine::ResetColour()
 {
     std::cout << ESC << START << NORMAL << "m" << std::flush;
+}
+
+void GameEngine::checkDirectory(std::string p)
+{
+    if (std::filesystem::exists(p))
+    {
+        ResetColour();
+        std::cout << "Directory exists!" << std::endl;
+    }
+    else
+    {
+        std::filesystem::create_directory(p);
+        if (std::filesystem::exists(p))
+        {
+            std::cout << "Directory created" << std::endl;
+        }
+    }
+}
+
+void GameEngine::CreateCharacter()
+{
 }
 
 

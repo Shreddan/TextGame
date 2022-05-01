@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <string>
 #include <Windows.h>
+#include <filesystem>
 #include <format>
 #include <single_include/nlohmann/json.hpp>
 #include "System.h"
@@ -28,6 +29,8 @@ public:
 	int convertStrToCMD(std::string& str);
 	void OutputColour(int type);
 	void ResetColour();
+	void checkDirectory(std::string p);
+	void CreateCharacter();
 
 private:
 	bool Running;
