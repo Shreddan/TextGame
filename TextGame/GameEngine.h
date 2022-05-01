@@ -4,6 +4,7 @@
 #include <string>
 #include <Windows.h>
 #include <filesystem>
+#include <fstream>
 #include <format>
 #include <single_include/nlohmann/json.hpp>
 #include "System.h"

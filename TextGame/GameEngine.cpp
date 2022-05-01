@@ -81,7 +81,7 @@ int GameEngine::convertStrToCMD(std::string& str)
     }
 
     
-    std::cout << rs.length() << std::endl;
+    //std::cout << rs.length() << std::endl;
     if (rs[0] == "help")
     {
         return 1;
@@ -166,9 +166,7 @@ void GameEngine::CreateCharacter()
     std::getline(std::cin, name);
     player = new Character(name);
 
-    const std::filesystem::path chara{ characters / name };
-    
-
+    std::ofstream o{ characters / name };
 }
 
 void GameEngine::LoadCharacters()
@@ -178,6 +176,11 @@ void GameEngine::LoadCharacters()
         for (auto const& dir_entry : std::filesystem::directory_iterator{ characters })
         {
             Characters.push_back(dir_entry.path().stem().string());
+        }
+
+        for (size_t i = 0; i < Characters.size(); i++)
+        {
+            std::cout << Characters[i] << std::endl;
         }
     }
     else
