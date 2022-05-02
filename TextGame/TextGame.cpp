@@ -8,14 +8,14 @@ int main()
 
     GameEngine g;
 
-    g.OutputColour(g.System);
+    g.outputColour(g.System);
     std::cout << "Welcome to my text game...." << std::endl;
-    g.OutputColour(g.Hostile);
+    g.outputColour(g.Hostile);
     std::cout << "theres nothing really here yet, but hopefully....soon" << std::endl;
-    g.OutputColour(g.Player);
+    g.outputColour(g.Player);
     std::cout << "Type [help] to learn the commands you can do" << std::endl;
     std::cout << std::endl;
-    g.ResetColour();
+    g.resetColour();
 
     g.checkDirectory("Characters");
     g.update();

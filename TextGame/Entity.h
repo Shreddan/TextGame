@@ -5,6 +5,7 @@ public:
 	Entity();
 	~Entity();
 
-	virtual void Interact() = 0; 
+	virtual void interact() = 0;
+	virtual void update() = 0;
 };
 

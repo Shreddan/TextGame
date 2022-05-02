@@ -29,11 +29,14 @@ public:
 	void update();
 	void parse(std::string& input);
 	int convertStrToCMD(std::string& str);
-	void OutputColour(int type);
-	void ResetColour();
+	void outputColour(int type);
+	void resetColour();
 	void checkDirectory(std::string p);
-	void CreateCharacter();
-	void LoadCharacters();
+	void createCharacter();
+	void loadCharacters();
+	void loadChar();
+	void displayCharacters();
+	void saveCharacter();
 
 private:
 	bool Running;
