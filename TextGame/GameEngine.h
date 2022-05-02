@@ -6,7 +6,7 @@
 #include <filesystem>
 #include <fstream>
 #include <format>
-#include <single_include/nlohmann/json.hpp>
+
 #include "System.h"
 #include <regex>
 #include "Character.h"
@@ -26,6 +26,7 @@ public:
 
 	};
 
+	void startPrompt();
 	void update();
 	void parse(std::string& input);
 	int convertStrToCMD(std::string& str);
@@ -37,6 +38,7 @@ public:
 	void loadChar();
 	void displayCharacters();
 	void saveCharacter();
+	
 
 private:
 	bool Running;

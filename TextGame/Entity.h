@@ -1,4 +1,6 @@
 #pragma once
+#include <single_include/nlohmann/json.hpp>
+
 class Entity
 {
 public:

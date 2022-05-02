@@ -5,10 +5,26 @@ GameEngine::GameEngine()
 {
     this->Running = true;
     this->option = 0;
+    this->player = nullptr;
 }
 
 GameEngine::~GameEngine()
 {
+}
+
+void GameEngine::startPrompt()
+{
+    outputColour(System);
+    std::cout << "What would you like to do?" << std::endl;
+    std::cout << std::endl;
+
+    resetColour();
+    std::cout << "Help" << std::endl;
+    std::cout << "New Character" << std::endl;
+    std::cout << "Characters" << std::endl;
+    std::cout << "Load Character" << std::endl;
+    std::cout << "(Q)uit" << std::endl;
+    std::cout << std::endl;
 }
 
 void GameEngine::update()
@@ -16,6 +32,8 @@ void GameEngine::update()
     loadCharacters();
     while (this->option != 2)
     {
+        startPrompt();
+
         std::getline(std::cin, input);
 
         for (int i = 0; i < input.size(); i++)
@@ -47,9 +65,9 @@ void GameEngine::parse(std::string& input)
         {
             resetColour();
             std::cout << "This is the help screen ( type the commands without the ] )" << std::endl;
-            std::cout << "to create a new character type [new]" << std::endl;
-            std::cout << "to load an existing character type [load]" << std::endl;
-            std::cout << "to delete an existing character type [delete]" << std::endl;
+            std::cout << "to create a new character type [new character]" << std::endl;
+            std::cout << "to load an existing character type [load character]" << std::endl;
+            //std::cout << "to delete an existing character type [delete]" << std::endl;
             std::cout << std::endl;
             break;
         }
@@ -149,6 +167,7 @@ void GameEngine::checkDirectory(std::string p)
     {
         resetColour();
         std::cout << "Directory exists!" << std::endl;
+        std::cout << std::endl;
         
     }
     else
@@ -157,6 +176,7 @@ void GameEngine::checkDirectory(std::string p)
         if (std::filesystem::exists(p))
         {
             std::cout << "Directory created!" << std::endl;
+            std::cout << std::endl;
         }
     }
 }
@@ -174,7 +194,7 @@ void GameEngine::createCharacter()
 
     saveCharacter();
 
-    Characters.push_back(player->getName());
+    Characters.push_back(player->name);
 }
 
 void GameEngine::loadCharacters()
@@ -184,11 +204,16 @@ void GameEngine::loadCharacters()
         for (auto const& dir_entry : std::filesystem::directory_iterator{ characters })
         {
             Characters.push_back(dir_entry.path().stem().string());
+
+            std::cout << "Characters loaded" << std::endl;
+            std::cout << std::endl;
         }
     }
     else
     {
+        resetColour();
         std::cout << "No Characters found :(" << std::endl;
+        std::cout << std::endl;
         return;
     }
     
@@ -214,14 +239,29 @@ void GameEngine::loadChar()
         if (std::filesystem::is_regular_file(characters / name))
         {
             std::ifstream ifs{ characters / name };
-            j << ifs;
+            ifs >> j;
+
+            if (player == nullptr)
+            {
+                auto p = j.get<Character>();
+                player = &p;
+                std::cout << "Character " << player->name << " loaded!" << std::endl;
+                std::cout << std::endl;
+            }
+        }
+        else
+        {
+            std::cout << "this is not a player file?! " << std::endl;
+            std::cout << std::endl;
         }
     }
     else
     {
         std::cout << "Character does not exist :(" << std::endl;
+        std::cout << std::endl;
         return;
     }
+
 
 }
 
@@ -231,11 +271,12 @@ void GameEngine::displayCharacters()
     {
         std::cout << Characters[i] << std::endl;
     }
+    std::cout << std::endl;
 }
 
 void GameEngine::saveCharacter()
 {
-    std::string lowercaseName = player->getName();
+    std::string lowercaseName = player->name;
 
     for (size_t i = 0; i < lowercaseName.size(); i++)
     {
@@ -243,28 +284,7 @@ void GameEngine::saveCharacter()
     }
 
     std::ofstream o{ characters / lowercaseName};
-    nlohmann::json j;
-    j["name"] = player->getName();
-    j["healthmax"] = player->getHealthmax();
-    j["focusmax"] = player->getFocusmax();
-    j["level"] = player->getLevel();
-    j["exp"] = player->getExp();
-    j["staminamax"] = player->getStaminamax();
-    j["strength"] = player->getStrength();
-    j["endurance"] = player->getEndurance();
-    j["intelligence"] = player->getIntelligence();
-    j["wisdom"] = player->getWisdom();
-    j["luck"] = player->getLuck();
-    j["charisma"] = player->getCharisma();
-    j["dexterity"] = player->getDexterity();
-    j["arcane"] = player->getArcane();
-    j["arcaneexp"] = player->getArcaneexp();
-    j["foraging"] = player->getForaging();
-    j["foragingexp"] = player->getForagingexp();
-    j["pathfinding"] = player->getPathfinding();
-    j["pathfindingexp"] = player->getPathfindingexp();
-    j["extrasensory"] = player->getExtrasensory();
-    j["extrasensoryexp"] = player->getExtrasensoryexp();
+    nlohmann::json j = *player;
 
     o << std::setw(4) << j << std::endl;
 }
