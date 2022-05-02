@@ -50,6 +50,5 @@ public:
 
 };
 
-void to_json(nlohmann::json& j, const Character& c);
-void from_json(const nlohmann::json& j, Character& c);
+
 

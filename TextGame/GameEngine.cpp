@@ -14,6 +14,8 @@ GameEngine::~GameEngine()
 
 void GameEngine::startPrompt()
 {
+    resetColour();
+    std::cout << "><============================><" << std::endl;
     outputColour(System);
     std::cout << "What would you like to do?" << std::endl;
     std::cout << std::endl;
@@ -24,6 +26,8 @@ void GameEngine::startPrompt()
     std::cout << "Characters" << std::endl;
     std::cout << "Load Character" << std::endl;
     std::cout << "(Q)uit" << std::endl;
+    std::cout << std::endl;
+    std::cout << "><============================><" << std::endl;
     std::cout << std::endl;
 }
 
@@ -267,11 +271,18 @@ void GameEngine::loadChar()
 
 void GameEngine::displayCharacters()
 {
+    std::cout << "Current Characters" << std::endl;
+    outputColour(1);
+    std::cout << "<===============================>" << std::endl;
+    std::cout << std::endl;
     for (size_t i = 0; i < Characters.size(); i++)
     {
         std::cout << Characters[i] << std::endl;
     }
     std::cout << std::endl;
+    std::cout << "<===============================>" << std::endl;
+    std::cout << std::endl;
+    resetColour();
 }
 
 void GameEngine::saveCharacter()

@@ -153,6 +153,7 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameEngine.h" />
+    <ClInclude Include="globals.h" />
     <ClInclude Include="Region.h" />
     <ClInclude Include="System.h" />
   </ItemGroup>

@@ -1,4 +1,7 @@
 #pragma once
+#include <single_include/nlohmann/json.hpp>
+#include "globals.h"
+
 class Region
 {
 public:
@@ -6,6 +9,10 @@ public:
 	~Region();
 
 	int Area;
+	int rooms;
+
+	
+
 
 };
 

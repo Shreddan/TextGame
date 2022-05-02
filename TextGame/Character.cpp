@@ -4,6 +4,9 @@ Character::Character()
 {
 	this->health = healthMax;
 	this->focus = focusMax;
+	this->stamina = staminaMax;
+	this->hunger = hungerMax;
+	this->thirst = thirstMax;
 
 }
 
