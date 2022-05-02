@@ -167,6 +167,16 @@ void GameEngine::CreateCharacter()
     player = new Character(name);
 
     std::ofstream o{ characters / name };
+    nlohmann::json j;
+    j["name"] = player->getName();
+    j["healthmax"] = player->getHealthmax();
+    j["focusmax"] = player->getFocusmax();
+    j["level"] = player->getLevel();
+    j["exp"] = player->getExp();
+    j["staminamax"] = player->getStaminamax();
+    j["strength"] = player->getStrength();
+
+    o << std::setw(4) << j << std::endl;
 }
 
 void GameEngine::LoadCharacters()

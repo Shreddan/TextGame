@@ -10,17 +10,29 @@ public:
 
 	void Interact();
 
+
+	//Getters
+	std::string getName() { return this->name; }
+	int getHealthmax() { return this->healthMax; }
+	int getFocusmax() { return this->focusMax; }
+	int getLevel() { return this->level; }
+	int getExp() { return this->exp; }
+	int getStaminamax() { return this->staminaMax; }
+
+	int getStrength() { return this->strength; }
+
 private:
 
 	//Char vars
 	std::string name;
-	int Health;
-	int HealthMax;
-	int Focus;
-	int FocusMax;
+	int health;
+	int healthMax;
+	int focus;
+	int focusMax;
 	int level;
 	int exp;
 	int stamina;
+	int staminaMax;
 
 	//Char Stats
 	int strength;
