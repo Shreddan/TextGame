@@ -38,14 +38,14 @@ public:
 
 
 	//Char Skills + EXP
-	int arcane;
-	int arcaneExp;
-	int foraging;
-	int foragingExp;
-	int pathFinding;
-	int pathFindingExp;
-	int extraSensory;
-	int extraSensoryExp;
+	int arcane = 0;
+	int arcaneExp = 0;
+	int foraging = 0;
+	int foragingExp = 0;
+	int pathFinding = 0;
+	int pathFindingExp = 0;
+	int extraSensory = 0;
+	int extraSensoryExp = 0;
 
 
 };
